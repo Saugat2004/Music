@@ -71,7 +71,7 @@ nav ul li a.active {
 
 main {
     padding: 2rem;
-    /* max-width: 1200px; */
+   git max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -85,7 +85,7 @@ h1, h2, h3 {
 
 
 .hero {
-    width: 100%;
+    /* width: 100vw; */
     /* margin: 0 auto 2rem auto; */
     border-radius: 8px;
     overflow: hidden;
