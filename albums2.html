@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albums | ROCKHEADS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Bebas+Neue&family=Montserrat:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff3e6c;
+            --primary-dark: #e0355d;
+            --dark: #121212;
+            --dark-light: #1a1a1a;
+            --light: #f8f9fa;
+            --gray: #8c8c8c;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, rgba(18, 18, 18, 0.95) 0%, rgba(30, 15, 20, 0.9) 100%);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: rgba(18, 18, 18, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: bold;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 2px;
+            color: var(--primary);
+            text-transform: uppercase;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            color: white;
+            text-shadow: 0 0 10px var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links li a {
+            position: relative;
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links li a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links li a:hover::after,
+        .nav-links li a.active::after {
+            width: 100%;
+        }
+
+        .nav-links li a.active {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        /* Albums Header */
+        .albums-header {
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
+                url('https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80');
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 3rem;
+        }
+
+        .albums-header h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+            position: relative;
+            z-index: 10;
+            color: white;
+            letter-spacing: 2px;
+        }
+
+        .albums-subtitle {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        /* Album Sections */
+        .album-section {
+            max-width: 1400px;
+            margin: 0 auto 5rem;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            position: relative;
+            font-size: 2.5rem;
+            margin-bottom: 2.5rem;
+            font-family: 'Roboto Condensed', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+            display: inline-block;
+        }
+
+        .album-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .album-card {
+            background: rgba(26, 26, 26, 0.85);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            position: relative;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .album-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(255, 62, 108, 0.2);
+            background: rgba(40, 15, 25, 0.9);
+            border-color: rgba(255, 62, 108, 0.3);
+        }
+
+        .album-cover {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .album-card:hover .album-cover {
+            transform: scale(1.05);
+        }
+
+        .album-info {
+            padding: 1.8rem;
+        }
+
+        .album-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .album-year {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .album-year i {
+            font-size: 1.2rem;
+        }
+
+        .audio-player-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .progress-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            height: 6px;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .progress-bar {
+            background: var(--primary);
+            border-radius: 5px;
+            height: 100%;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .player-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.8rem;
+        }
+
+        .control-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+        }
+
+        .control-btn:hover {
+            color: var(--primary);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .play-btn {
+            background: var(--primary);
+            width: 40px;
+            height: 40px;
+            font-size: 1.3rem;
+        }
+
+        .play-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        .time-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-top: 0.5rem;
+        }
+
+        .track-title {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            color: var(--gray);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .recent-section {
+            margin-bottom: 4rem;
+        }
+
+        .other-section .album-grid {
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        }
+
+        .other-section .album-card {
+            background: rgba(26, 26, 26, 0.7);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-light);
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--gray);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            color: var(--gray);
+            font-size: 1rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .album-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+
+            .albums-header h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .albums-header {
+                padding: 4rem 2rem 3rem;
+            }
+
+            .albums-header h1 {
+                font-size: 2.8rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .albums-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .album-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">ROCKHEADS</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index2.html">New Home</a></li>
+                <li><a href="tour.html">Tour</a></li>
+                <li><a href="tour2.html">New Tour</a></li>
+                <li><a href="albums.html" class="active">Albums</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="albums-header">
+            <h1>Explore the Music</h1>
+            <p class="albums-subtitle">Dive into the discography of ROCKHEADS. Experience the evolution of our sound
+                from raw beginnings to polished productions.</p>
+        </section>
+
+        <section class="album-section recent-section">
+            <h2 class="section-title">Recently Released</h2>
+            <div class="album-grid">
+                <div class="album-card">
+                    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                        alt="Bhawana" class="album-cover">
+                    <div class="album-info">
+                        <h3 class="album-title">Bhawana</h3>
+                        <p class="album-year"><i class="fas fa-calendar-alt"></i> 2024</p>
+                        <div class="audio-player-container">
+                            <div class="track-title">Bhawana (Title Track)</div>
+                            <div class="progress-container">
+                                <div class="progress-bar"></div>
+                            </div>
+                            <div class="time-info">
+                                <span class="current-time">0:00</span>
+                                <span class="duration">3:45</span>
+                            </div>
+                            <div class="player-controls">
+                                <button class="control-btn"><i class="fas fa-step-backward"></i></button>
+                                <button class="control-btn play-btn"><i class="fas fa-play"></i></button>
+                                <button class="control-btn"><i class="fas fa-step-forward"></i></button>
+                                <button class="control-btn"><i class="fas fa-volume-up"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="album-card">
+                    <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                        alt="Hajar Janma" class="album-cover">
+                    <div class="album-info">
+                        <h3 class="album-title">Hajar Janma</h3>
+                        <p class="album-year"><i class="fas fa-calendar-alt"></i> 2023</p>
+                        <div class="audio-player-container">
+                            <div class="track-title">Hajar Janma (Main Track)</div>
+                            <div class="progress-container">
+                                <div class="progress-bar"></div>
+                            </div>
+                            <div class="time-info">
+                                <span class="current-time">0:00</span>
+                                <span class="duration">4:15</span>
+                            </div>
+                            <div class="player-controls">
+                                <button class="control-btn"><i class="fas fa-step-backward"></i></button>
+                                <button class="control-btn play-btn"><i class="fas fa-play"></i></button>
+                                <button class="control-btn"><i class="fas fa-step-forward"></i></button>
+                                <button class="control-btn"><i class="fas fa-volume-up"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="album-section other-section">
+            <h2 class="section-title">Other Albums</h2>
+            <div class="album-grid">
+                <div class="album-card">
+                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80"
+                        alt="Ranga" class="album-cover">
+                    <div class="album-info">
+                        <h3 class="album-title">Ranga</h3>
+                        <p class="album-year"><i class="fas fa-calendar-alt"></i> 2022</p>
+                        <div class="audio-player-container">
+                            <div class="track-title">Ranga (Title Track)</div>
+                            <div class="progress-container">
+                                <div class="progress-bar"></div>
+                            </div>
+                            <div class="time-info">
+                                <span class="current-time">0:00</span>
+                                <span class="duration">3:55</span>
+                            </div>
+                            <div class="player-controls">
+                                <button class="control-btn"><i class="fas fa-step-backward"></i></button>
+                                <button class="control-btn play-btn"><i class="fas fa-play"></i></button>
+                                <button class="control-btn"><i class="fas fa-step-forward"></i></button>
+                                <button class="control-btn"><i class="fas fa-volume-up"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="album-card">
+                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80"
+                        alt="Dhun" class="album-cover">
+                    <div class="album-info">
+                        <h3 class="album-title">Dhun</h3>
+                        <p class="album-year"><i class="fas fa-calendar-alt"></i> 2022</p>
+                        <div class="audio-player-container">
+                            <div class="track-title">Dhun (Main Track)</div>
+                            <div class="progress-container">
+                                <div class="progress-bar"></div>
+                            </div>
+                            <div class="time-info">
+                                <span class="current-time">0:00</span>
+                                <span class="duration">4:20</span>
+                            </div>
+                            <div class="player-controls">
+                                <button class="control-btn"><i class="fas fa-step-backward"></i></button>
+                                <button class="control-btn play-btn"><i class="fas fa-play"></i></button>
+                                <button class="control-btn"><i class="fas fa-step-forward"></i></button>
+                                <button class="control-btn"><i class="fas fa-volume-up"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-spotify"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p class="copyright">© 2025 ROCKHEADS. All Rights Reserved</p>
+    </footer>
+
+    <script>
+        // Audio Player Functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const audioPlayers = document.querySelectorAll('.audio-player-container');
+
+            audioPlayers.forEach(player => {
+                const audio = new Audio();
+                const playBtn = player.querySelector('.play-btn');
+                const playIcon = playBtn.querySelector('i');
+                const progressBar = player.querySelector('.progress-bar');
+                const currentTimeEl = player.querySelector('.current-time');
+                const durationEl = player.querySelector('.duration');
+                const progressContainer = player.querySelector('.progress-container');
+
+                // Set placeholder audio source
+                audio.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+
+                // Format time for display
+                function formatTime(seconds) {
+                    const minutes = Math.floor(seconds / 60);
+                    seconds = Math.floor(seconds % 60);
+                    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                }
+
+                // Update progress bar
+                audio.addEventListener('timeupdate', () => {
+                    const percent = (audio.currentTime / audio.duration) * 100;
+                    progressBar.style.width = `${percent}%`;
+                    currentTimeEl.textContent = formatTime(audio.currentTime);
+                });
+
+                // Set duration on load
+                audio.addEventListener('loadedmetadata', () => {
+                    durationEl.textContent = formatTime(audio.duration);
+                });
+
+                // Play/Pause button
+                playBtn.addEventListener('click', () => {
+                    if (audio.paused) {
+                        audio.play();
+                        playIcon.classList.remove('fa-play');
+                        playIcon.classList.add('fa-pause');
+                    } else {
+                        audio.pause();
+                        playIcon.classList.remove('fa-pause');
+                        playIcon.classList.add('fa-play');
+                    }
+                });
+
+                // Progress bar click
+                progressContainer.addEventListener('click', (e) => {
+                    const width = progressContainer.clientWidth;
+                    const clickX = e.offsetX;
+                    const duration = audio.duration;
+
+                    audio.currentTime = (clickX / width) * duration;
+                });
+
+                // End of track
+                audio.addEventListener('ended', () => {
+                    playIcon.classList.remove('fa-pause');
+                    playIcon.classList.add('fa-play');
+                    progressBar.style.width = '0%';
+                    currentTimeEl.textContent = '0:00';
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
