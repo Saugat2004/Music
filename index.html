@@ -1,70 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Music</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
     <header>
-        <nav>
-            <div class="logo">ROCKHEADS</div>
-            <ul>
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="tour.html">Tour</a></li>
-                <li><a href="albums.html">Albums</a></li>
-            </ul>
-        </nav>
+      <nav>
+        <div class="logo">ROCKHEADS</div>
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="tour.html">Tour</a></li>
+          <li><a href="albums.html">Albums</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
     </header>
 
-    <main>
+    <main class="homeimage">
       <section class="hero">
-        <img src="mus.jpg" alt="Rockhead Banner" class="hero-image">
-        <div class="hero-text">Where words fail, MUSIC speaks</div>
-    </section>
+        <img src="mus.jpg" class="hero-image" />
+        <div class="hero-text">Where words fail, <span>MUSIC</span> speaks</div>
+      </section>
 
-        <section class="featured-music">
-            <h2>Listen Now</h2>
-            <div class="audio-player">
-                <audio id="main-audio" controls>
-                    <source src="bhawana.mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
-                <div class="player-controls">
-                    <button id="play-btn">Play</button>
-                    <button id="pause-btn">Pause</button>
-                    <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="1">
-                </div>
+      <section class="featured-music">
+        <h2><i class="fas fa-headphones"></i> Listen Now</h2>
+        <div class="audio-player">
+          <audio id="main-audio" controls>
+            <source src="ranga.mp3" type="audio/mpeg" />
+          </audio>
+          <div class="player-controls">
+            <button id="play-btn"><i class="fas fa-play"></i></button>
+            <button id="pause-btn"><i class="fas fa-pause"></i></button>
+            <div class="volume-control">
+              <i class="fas fa-volume-up"></i>
+              <input
+                type="range"
+                id="volume-slider"
+                min="0"
+                max="1"
+                step="0.1"
+                value="1"
+              />
             </div>
-        </section>
+          </div>
+        </div>
+      </section>
 
-        <section class="upcoming-events">
-            <h2>Upcoming Events</h2>
-            <div class="event-cards">
-                
-                <div class="event-card">
-                     <h3>Kathmandu</h3>
-                <p>June 15, 2025</p>
-                <p>Purple Haze Rock Bar</p>
-                    <a href="tour.html" class="btn">Get Tickets</a>
-                </div>
-                <div class="event-card">
-                    <h3>Pokhara</h3>
-                <p>June 22, 2025</p>
-                <p>Paradiso Pokhara</p>
-                    <a href="tour.html" class="btn">Get Tickets</a>
-                </div>
-            </div>
-            <a href="tour.html" class="see-all">See all tour dates →</a>
-        </section>
+      <section class="upcoming-events">
+        <h2><i class="fas fa-calendar-alt"></i> Upcoming Events</h2>
+        <div class="event-cards">
+          <div class="event-card">
+            <h3>Kathmandu</h3>
+            <p><i class="far fa-calendar"></i> June 15, 2025</p>
+            <p><i class="fas fa-map-marker-alt"></i> Purple Haze Rock Bar</p>
+            <a href="tour.html" class="btn"
+              >Get Tickets <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+          <div class="event-card">
+            <h3>Pokhara</h3>
+            <p><i class="far fa-calendar"></i> June 22, 2025</p>
+            <p><i class="fas fa-map-marker-alt"></i> Paradiso Pokhara</p>
+            <a href="tour.html" class="btn"
+              >Get Tickets <i class="fas fa-arrow-right"></i
+            ></a>
+          </div>
+        </div>
+        <a href="tour.html" class="see-all"
+          >See all tour dates <i class="fas fa-chevron-right"></i
+        ></a>
+      </section>
     </main>
 
     <footer>
-        <p>© 2025 ROCKHEADS. All Rights Reserved</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-spotify"></i></a>
+      </div>
+      <p>© 2025 ROCKHEADS. All Rights Reserved</p>
     </footer>
-
-    <script src="script.js"></script>
-</body>
+  </body>
 </html>
