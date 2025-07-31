@@ -204,6 +204,24 @@ footer {
   padding: 2rem;
   margin-top: 3rem;
 }
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer-nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s;
+}
+
+.footer-nav a:hover {
+  color: #ff4d4d;
+}
+
 
 .social-icons {
   display: flex;
