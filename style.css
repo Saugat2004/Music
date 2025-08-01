@@ -403,10 +403,11 @@ footer {
 .about-text {
   flex: 1;
   padding-left: 30px;
+
 }
 
 .about-text h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-bottom: 20px;
   color: #f8f8f8;
 }
